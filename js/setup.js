@@ -56,6 +56,9 @@ setupDialog.querySelector('.setup-similar').classList.remove('hidden'); // Вс�
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setupDialog.querySelector('.setup-close');
 
+var coordinatesSetupTop = setupDialog.style.top;
+var coordinatesSetupLeft = setupDialog.style.left;
+
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
@@ -73,6 +76,8 @@ var openPopup = function () {
 var closePopup = function () {
   setupDialog.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setupDialog.style.top = coordinatesSetupTop;
+  setupDialog.style.left = coordinatesSetupLeft;
 };
 
 setupOpen.addEventListener('click', function () {
@@ -164,4 +169,43 @@ var wizardFireball = setupDialog.querySelector('.setup-fireball-wrap');
 wizardFireball.addEventListener('click', function () { // событие по изменению цвета фаербола при нажатии
   var colorFireball = COLOR_WIZARD_FIREBALL[getRandomIndex(0, COLOR_WIZARD_FIREBALL.length - 1)];
   wizardFireball.style.background = colorFireball;
+});
+
+// перемещаем звезды
+
+var shopElement = document.querySelector('.setup-artifacts-shop');
+var artifactsElement = document.querySelector('.setup-artifacts');
+var draggedItem = null;
+
+shopElement.addEventListener('dragstart', function (evt) {
+  if (evt.target.tagName.toLowerCase() === 'img') {
+    draggedItem = evt.target.cloneNode(true);
+    evt.dataTransfer.setData('text/plain', evt.target.alt);
+    artifactsElement.style.outline = '2px dashed red';
+  }
+});
+
+artifactsElement.addEventListener('dragover', function (evt) {
+  evt.preventDefault();
+  return false;
+});
+
+artifactsElement.addEventListener('drop', function (evt) {
+  artifactsElement.style.outline = '';
+  evt.target.style.backgroundColor = '';
+  evt.target.style.outline = '';
+  evt.target.appendChild(draggedItem);
+  evt.preventDefault();
+});
+
+artifactsElement.addEventListener('dragenter', function (evt) {
+  evt.target.style.backgroundColor = 'yellow';
+  evt.target.style.outline = '2px dashed red';
+  evt.preventDefault();
+});
+
+artifactsElement.addEventListener('dragleave', function (evt) {
+  evt.target.style.backgroundColor = '';
+  evt.target.style.outline = '';
+  evt.preventDefault();
 });
