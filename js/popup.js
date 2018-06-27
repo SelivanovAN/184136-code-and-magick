@@ -3,10 +3,10 @@
 (function () {
   // Блок открытия и закрытия настройки персонажа
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.setupDialog.querySelector('.setup-close');
+  var setupClose = window.renderWizards.setupDialogElement.querySelector('.setup-close');
 
-  var coordinatesSetupTop = window.setupDialog.style.top;
-  var coordinatesSetupLeft = window.setupDialog.style.left;
+  var coordinatesSetupTop = window.renderWizards.setupDialogElement.style.top;
+  var coordinatesSetupLeft = window.renderWizards.setupDialogElement.style.left;
 
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
@@ -18,15 +18,15 @@
   };
 
   var openPopup = function () {
-    window.setupDialog.classList.remove('hidden');
+    window.renderWizards.setupDialogElement.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
 
   var closePopup = function () {
-    window.setupDialog.classList.add('hidden');
+    window.renderWizards.setupDialogElement.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
-    window.setupDialog.style.top = coordinatesSetupTop;
-    window.setupDialog.style.left = coordinatesSetupLeft;
+    window.renderWizards.setupDialogElement.style.top = coordinatesSetupTop;
+    window.renderWizards.setupDialogElement.style.left = coordinatesSetupLeft;
   };
 
   setupOpen.addEventListener('click', function () {
@@ -50,7 +50,7 @@
   });
 
   // Блок валидации ввода имени персонажа
-  var userNameInput = window.setupDialog.querySelector('.setup-user-name');
+  var userNameInput = window.renderWizards.setupDialogElement.querySelector('.setup-user-name');
 
   userNameInput.addEventListener('invalid', function () { // eslint выдает ошибку - почему, где ее использовать надо?
     if (userNameInput.validity.tooShort) {

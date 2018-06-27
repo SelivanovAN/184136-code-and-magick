@@ -11,7 +11,7 @@
     'rgb(0, 0, 0)'
   ];
 
-  var wizardCoat = window.setupDialog.querySelector('.setup-wizard .wizard-coat');
+  var wizardCoat = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-coat');
 
   wizardCoat.addEventListener('click', function () { // событие по изменению цвета мантии мага при нажатии
     var colorCoat = COLOR_WIZARD_COAT[window.util.getRandomIndex(0, COLOR_WIZARD_COAT.length - 1)];
@@ -26,7 +26,7 @@
     'green'
   ];
 
-  var wizardEyes = window.setupDialog.querySelector('.setup-wizard .wizard-eyes');
+  var wizardEyes = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-eyes');
 
   wizardEyes.addEventListener('click', function () { // событие по изменению цвета глаз мага при нажатии
     var colorEyes = COLOR_WIZARD_EYES[window.util.getRandomIndex(0, COLOR_WIZARD_EYES.length - 1)];
@@ -41,7 +41,7 @@
     '#e6e848'
   ];
 
-  var wizardFireball = window.setupDialog.querySelector('.setup-fireball-wrap');
+  var wizardFireball = window.renderWizards.setupDialogElement.querySelector('.setup-fireball-wrap');
 
   wizardFireball.addEventListener('click', function () { // событие по изменению цвета фаербола при нажатии
     var colorFireball = COLOR_WIZARD_FIREBALL[window.util.getRandomIndex(0, COLOR_WIZARD_FIREBALL.length - 1)];

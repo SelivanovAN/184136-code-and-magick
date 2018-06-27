@@ -20,5 +20,8 @@
   };
 
   appendWizard();
-  window.wizards = wizards;
+
+  window.createWizard = {
+    wizardsArr: wizards
+  };
 })();

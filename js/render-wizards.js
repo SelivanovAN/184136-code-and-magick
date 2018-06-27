@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.setupDialog = document.querySelector('.setup');
+  var setupDialog = document.querySelector('.setup');
   // setupDialog.classList.remove('hidden');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -16,15 +16,19 @@
   var fragment = document.createDocumentFragment(); // создаем контейнер для хранения ДОМ мага
 
   var appendWizardsInFragment = function () { // функция для генерации 4-х ДОМ магов и вставки в контейнер
-    for (var i = 0; i < window.wizards.length; i++) {
-      fragment.appendChild(renderWizard(window.wizards[i]));
+    for (var i = 0; i < window.createWizard.wizardsArr.length; i++) {
+      fragment.appendChild(renderWizard(window.createWizard.wizardsArr[i]));
     }
-    var similarListElement = window.setupDialog.querySelector('.setup-similar-list');
+    var similarListElement = setupDialog.querySelector('.setup-similar-list');
 
     similarListElement.appendChild(fragment); // вставляем из контейнера в разметку 4-х ДОМ магов
   };
 
   appendWizardsInFragment(); // запуск фунции по герации 4-х ДОМ магов и вставки в контейнер
 
-  window.setupDialog.querySelector('.setup-similar').classList.remove('hidden'); // Вставка ДОМ магов из контейнера в разметку
+  setupDialog.querySelector('.setup-similar').classList.remove('hidden'); // Вставка ДОМ магов из контейнера в разметку
+
+  window.renderWizards = {
+    setupDialogElement: setupDialog
+  };
 })();
