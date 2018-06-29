@@ -4,6 +4,8 @@
   var setupDialog = document.querySelector('.setup');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
+  var wizards = [];
+
   var renderWizard = function (wizard) { // функция по созданию ДОМ мага (одного мага)
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
@@ -14,7 +16,8 @@
 
   var similarListElement = setupDialog.querySelector('.setup-similar-list');
 
-  var onSuccessed = function (wizards) {
+  var onSuccessed = function (response) {
+    wizards = response.slice();
     var fragment = document.createDocumentFragment();
     var NUMBERS_WIZARDS = 4;
 
@@ -53,6 +56,9 @@
   });
 
   window.renderWizards = {
-    setupDialogElement: setupDialog
+    setupDialogElement: setupDialog,
+    wizards: function () {
+      return wizards;
+    }
   };
 })();
