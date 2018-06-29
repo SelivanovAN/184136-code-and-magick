@@ -32,7 +32,7 @@
 
   var similarListElement = setupDialog.querySelector('.setup-similar-list');
 
-  var successHandler = function (wizards) {
+  var onSuccessed = function (wizards) {
     var fragment = document.createDocumentFragment();
     var NUMBERS_WIZARDS = 4;
 
@@ -45,7 +45,7 @@
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  var errorHandler = function (errorMessage) {
+  var onErrored = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     node.style.position = 'absolute';
@@ -57,7 +57,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.backend.load(successHandler, errorHandler);
+  window.backend.load(onSuccessed, onErrored);
 
   // send information
 
@@ -65,7 +65,7 @@
 
   form.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(form), function () {
-      window.util.closePopup();
+      window.popup.close();
     });
     evt.preventDefault();
   });

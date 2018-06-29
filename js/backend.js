@@ -1,6 +1,6 @@
 'use strict';
 
-window.backend = (function () {
+(function () {
   var URL_GET = 'https://js.dump.academy/code-and-magick/data';
   var URL_POST = 'https://js.dump.academy/code-and-magick';
 
@@ -33,7 +33,7 @@ window.backend = (function () {
     }
   };
 
-  return {
+  window.backend = {
     load: function (onLoad, onError) {
       getJSON(onLoad, onError, 'GET');
     },
