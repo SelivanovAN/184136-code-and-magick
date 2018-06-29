@@ -73,4 +73,8 @@
     }
   });
 
+  window.popup = {
+    close: closePopup
+  };
+
 })();
