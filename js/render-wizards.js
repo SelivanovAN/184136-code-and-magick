@@ -14,21 +14,47 @@
     return wizardElement;
   };
 
+
+  // Фильтрация магов по глазам и плащу
+  var newCoatColor;
+  var newEyesColor;
+
+  var updateWizards = function () {
+
+    var sameCoatWizards = wizards.filter(function (it) {
+      return it.colorCoat === newCoatColor;
+    });
+    // var sameEyesWizards = wizards.filter(function (it) {
+    //   return it.colorEyes === newEyesColor;
+    // });
+    //
+    // onSuccessed(sameCoatWizards.concat(sameEyesWizards));
+
+    // window.render(sameCoatWizards);
+
+    renderWizard(sameCoatWizards);
+  };
+  // Фильтрация магов по глазам и плащу
+
+
   var similarListElement = setupDialog.querySelector('.setup-similar-list');
 
   var onSuccessed = function (response) {
     wizards = response.slice();
     var fragment = document.createDocumentFragment();
-    var NUMBERS_WIZARDS = 4;
+
+    var NUMBERS_WIZARDS = wizards.length > 4 ? 4 : wizards.length;
 
     for (var i = 0; i < NUMBERS_WIZARDS; i++) {
       fragment.appendChild(renderWizard(wizards[i]));
     }
+    updateWizards();
 
     similarListElement.appendChild(fragment);
 
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
+
 
   var onErrored = function (errorMessage) {
     var node = document.createElement('div');
@@ -61,4 +87,40 @@
       return wizards;
     }
   };
+
+  var COLOR_WIZARD_COAT = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ];
+
+  var wizardCoat = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-coat');
+
+  wizardCoat.addEventListener('click', function () { // событие по изменению цвета мантии мага при нажатии
+    var colorCoat = COLOR_WIZARD_COAT[window.util.getRandomIndex(0, COLOR_WIZARD_COAT.length - 1)];
+    wizardCoat.style.fill = colorCoat;
+    newCoatColor = colorCoat;
+    updateWizards();
+  });
+
+  var COLOR_WIZARD_EYES = [
+    'black',
+    'red',
+    'blue',
+    'yellow',
+    'green'
+  ];
+
+  var wizardEyes = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-eyes');
+
+  wizardEyes.addEventListener('click', function () { // событие по изменению цвета глаз мага при нажатии
+    var colorEyes = COLOR_WIZARD_EYES[window.util.getRandomIndex(0, COLOR_WIZARD_EYES.length - 1)];
+    wizardEyes.style.fill = colorEyes;
+    newEyesColor = colorEyes;
+    updateWizards();
+  });
+
 })();
