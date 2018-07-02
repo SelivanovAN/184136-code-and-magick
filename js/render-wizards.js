@@ -1,8 +1,14 @@
+
 'use strict';
 
 (function () {
+  var NUMBERS_WIZARDS = 4;
   var setupDialog = document.querySelector('.setup');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+  var fragment = document.createDocumentFragment();
+
+  var wizards = [];
 
   var renderWizard = function (wizard) { // функция по созданию ДОМ мага (одного мага)
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -12,20 +18,27 @@
     return wizardElement;
   };
 
-  var similarListElement = setupDialog.querySelector('.setup-similar-list');
 
-  var onSuccessed = function (wizards) {
-    var fragment = document.createDocumentFragment();
-    var NUMBERS_WIZARDS = 4;
+  var appendWizard = function (data) {
+    similarListElement.innerHTML = '';
 
     for (var i = 0; i < NUMBERS_WIZARDS; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+      fragment.appendChild(renderWizard(data[i]));
     }
 
     similarListElement.appendChild(fragment);
+  };
+
+  var similarListElement = setupDialog.querySelector('.setup-similar-list');
+
+  var onSuccessed = function (response) {
+    wizards = response.slice();
+
+    window.updateWizards(wizards);
 
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
+
 
   var onErrored = function (errorMessage) {
     var node = document.createElement('div');
@@ -53,6 +66,17 @@
   });
 
   window.renderWizards = {
-    setupDialogElement: setupDialog
+    setupDialogElement: setupDialog,
+    wizards: function () {
+      return wizards;
+    }
   };
+
+  window.wizards = {
+    render: appendWizard,
+    data: function () {
+      return wizards;
+    }
+  };
+
 })();
