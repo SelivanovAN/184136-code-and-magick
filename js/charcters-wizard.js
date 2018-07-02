@@ -5,6 +5,7 @@
   var newEyesColor;
 
   //  Блок по изменению цвета глаз, фаербола и мантии при нажатии
+
   var COLOR_WIZARD_COAT = [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
@@ -16,11 +17,15 @@
 
   var wizardCoat = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-coat');
 
-  wizardCoat.addEventListener('click', function () { // событие по изменению цвета мантии мага при нажатии
-    var colorCoat = COLOR_WIZARD_COAT[window.util.getRandomIndex(0, COLOR_WIZARD_COAT.length - 1)];
+  var changeCoatColor = function (colorCoat) {
     wizardCoat.style.fill = colorCoat;
     newCoatColor = colorCoat;
     window.updateWizards();
+  };
+
+  wizardCoat.addEventListener('click', function () { // событие по изменению цвета мантии мага при нажатии
+    var colorCoat = COLOR_WIZARD_COAT[window.util.getRandomIndex(0, COLOR_WIZARD_COAT.length - 1)];
+    window.debounce(changeCoatColor(colorCoat));
   });
 
   var COLOR_WIZARD_EYES = [
@@ -33,11 +38,15 @@
 
   var wizardEyes = window.renderWizards.setupDialogElement.querySelector('.setup-wizard .wizard-eyes');
 
-  wizardEyes.addEventListener('click', function () { // событие по изменению цвета глаз мага при нажатии
-    var colorEyes = COLOR_WIZARD_EYES[window.util.getRandomIndex(0, COLOR_WIZARD_EYES.length - 1)];
+  var changeEyesColor = function (colorEyes) {
     wizardEyes.style.fill = colorEyes;
     newEyesColor = colorEyes;
     window.updateWizards();
+  };
+
+  wizardEyes.addEventListener('click', function () { // событие по изменению цвета глаз мага при нажатии
+    var colorEyes = COLOR_WIZARD_EYES[window.util.getRandomIndex(0, COLOR_WIZARD_EYES.length - 1)];
+    window.debounce(changeEyesColor(colorEyes));
   });
 
   var COLOR_WIZARD_FIREBALL = [
