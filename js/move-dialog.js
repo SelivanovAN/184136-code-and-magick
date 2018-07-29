@@ -2,7 +2,9 @@
 (function () {
   // Перетаскивание окна мага
   var setup = document.querySelector('.setup');
-  var dialogHandle = setup.querySelector('.setup-user-pic'); // находим элемент за который тащим
+  // var dialogHandle = setup.querySelector('.setup-user-pic'); // находим элемент за который тащим
+
+  var dialogHandle = setup.querySelector('.upload input[type=file]'); // находим элемент за который тащим
 
   dialogHandle.addEventListener('mousedown', function (evt) { // обработаем событие начала перетаскивания нашего диалога
     evt.preventDefault();
